@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 
 logger = logging.getLogger(__name__)
 
-def send(to, cc, subject, body, attachments, keepRecord = True):
+def send(to, cc, subject, body, attachments = None, keepRecord = True):
     #Set the recipient to the current user as a default
     if not to:
         raise "recipient not specified"  
@@ -72,7 +72,7 @@ class MailViewSet(viewsets.ModelViewSet):
         if not request.user.is_staff:
             raise PermissionDenied
         mail = self.get_object()
-        send(mail.to, mail.subject, mail.body, None)
+        send(mail.to, mail.subject, mail.body)
         return super(MailViewSet, self).retrieve(request, *args, **kwargs)
     
     def update(self, request, *args, **kwargs):
