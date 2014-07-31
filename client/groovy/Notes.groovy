@@ -13,7 +13,7 @@ class Notes {
 				body: body],
 			requestContentType:
 				'application/json')
-		return res.status == 200
+		return res.status == 201
 	}		
 	
 	static public void main(String[] args) {
