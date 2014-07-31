@@ -3,7 +3,7 @@ WebNotes
 
 Restful Web Service for sending mail via Lotus Notes Client 
 
-Restful Web Service to interface with Lotus Notes Client
+Restful API to interface with Lotus Notes Client
 ----------------------------------------------------------------
 *   mail
 
