@@ -57,26 +57,18 @@ Testing
 	curl -v --noproxy -X POST -d 'to=a@abc.com,b@def.com&cc=c@ghi.com&subject=subject a&body=body a' http://localhost:3000/mail/api/mail/
 ```
 
-*	HTML Form: copy the following html to temporary file "mail.html" and open it with browser, 
+*	HTML Form: open the file 'client/html/mail.html' with browser, 
 	complete the form, and click send button to send mail via Web Service
+	
+*	Groovy
 ```
-<html>
-	<head>
-		<style>
-			input, textarea {
-				display: block;
-			}
-		</style>
-	</head>
-	<body>
-		<form action='http://localhost:3000/mail/api/mail/' method='post'>
-			<input type='text' name='to' placeholder='To'>
-			<input type='text' name='cc' placeholder='Cc'>
-			<input type='text' name='subject' placeholder='Subject'>
-			<textarea rows='10' cols='50' name='body'>
-			</textarea>
-			<button type='submit'>Send</button>
-		</form>
-	</body>
-</html>
+	groovy -jar client/groovy/Notes.jar
+```
+
+*	Java: See client/java/client/Notes.java
+```
+	cd client/java
+	javac -cp ../groovy/Notes.jar client/Notes.java
+	set CLASSPATH=.;../groovy/Notes.jar
+	java client.Notes 'a@abc.com' '' 'subject a' 'body a' 
 ```
