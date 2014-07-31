@@ -22,6 +22,7 @@ Configuration
 *   pip install -r requirements.txt
 *   update environment variables in start.bat
 ```
+	set root=%HOMEDRIVE%%HOMEPATH%\prod\WebNotes
     set PORT=3000
 ```
 
