@@ -57,8 +57,8 @@ Testing
 	curl -v --noproxy -X POST -d 'to=a@abc.com,b@def.com&cc=c@ghi.com&subject=subject a&body=body a' http://localhost:3000/mail/api/mail/
 ```
 
-*	copy the following html to temporary file "mail.html" and open it with browser
-	, complete the form, and click send button to send mail via Web Service
+*	copy the following html to temporary file "mail.html" and open it with browser, 
+	complete the form, and click send button to send mail via Web Service
 ```
 <html>
 	<head>
