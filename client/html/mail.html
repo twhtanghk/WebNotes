@@ -8,9 +8,15 @@
 	</head>
 	<body>
 		<form action='http://localhost:3000/mail/api/mail/' method='post'>
+			<label for="to">To</label>
 			<input type='text' name='to' placeholder='To'>
+			<label for="cc">Cc</label>
 			<input type='text' name='cc' placeholder='Cc'>
+			<label for="bcc">Bcc</label>
+			<input type='text' name='bcc' placeholder='Bcc'>
+			<label for="subject">Subject</label>
 			<input type='text' name='subject' placeholder='Subject'>
+			<label for="body">Body</label>
 			<textarea rows='10' cols='50' name='body'>
 			</textarea>
 			<button type='submit'>Send</button>

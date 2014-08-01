@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 
 logger = logging.getLogger(__name__)
 
-def send(to, cc, subject, body, attachments = None, keepRecord = True):
+def send(to, subject, body, cc = None, bcc = None, attachments = None, keepRecord = settings.KEEPRECORD):
     #Set the recipient to the current user as a default
     if not to:
         raise "recipient not specified"  
@@ -30,6 +30,9 @@ def send(to, cc, subject, body, attachments = None, keepRecord = True):
     if cc:
         mailTo = mailContent.CreateHeader("Cc")
         mailTo.SetHeaderVal(cc)
+    if bcc:
+        mailTo = mailContent.CreateHeader("Bcc")
+        mailTo.SetHeaderVal(bcc)
     stream = sess.CreateStream
     stream.WriteText(body)
     mailContent.SetContentFromText(stream, "text/html;charset=UTF-8", 1729)
@@ -61,18 +64,19 @@ class MailViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         to = request.DATA.get('to', '')
         cc = request.DATA.get('cc', '')
+        bcc = request.DATA.get('bcc', '')
         subject = request.DATA.get('subject', '')
         body = request.DATA.get('body', '') 
         attachments = None
-        send(to, cc, subject, body, attachments, settings.KEEPRECORD)
-        logger.debug("{0} {1} {2} {3}".format(to, cc, subject, body))
+        send(to, subject, body, cc, bcc)
+        logger.debug("{0} {1} {2} {3}".format(to, cc, bcc, subject, body))
         return super(MailViewSet, self).create(request, *args, **kwargs)
     
     def retrieve(self, request, *args, **kwargs):
         if not request.user.is_staff:
             raise PermissionDenied
         mail = self.get_object()
-        send(mail.to, mail.subject, mail.body)
+        send(mail.to, mail.subject, mail.body, mail.cc, mail.bcc)
         return super(MailViewSet, self).retrieve(request, *args, **kwargs)
     
     def update(self, request, *args, **kwargs):

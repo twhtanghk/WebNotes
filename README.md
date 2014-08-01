@@ -11,6 +11,7 @@ Restful API to interface with Lotus Notes Client
     post api/mail - send lotus notes mail with the following parameters
     	to:			comma delimited list of recipients
     	cc:			comma delimited list of copy-to recipients
+    	bcc:		comma delimited list of blind copy-to recipients
     	subject:	subject to be shown in the lotus notes mail
     	body:	 	mail body text in html or plain text
 ```
@@ -63,7 +64,7 @@ Testing
 	
 *	Groovy
 ```
-	groovy -jar client/groovy/Notes.jar
+	groovy -jar client/groovy/Notes.jar 'to list' 'subject' 'body' 'cc list' 'bcc list'
 ```
 
 *	Java: See client/java/client/Notes.java
@@ -71,5 +72,5 @@ Testing
 	cd client/java
 	javac -cp ../groovy/Notes.jar client/Notes.java
 	set CLASSPATH=.;../groovy/Notes.jar
-	java client.Notes 'a@abc.com' '' 'subject a' 'body a' 
+	java client.Notes 'to list' 'subject' 'body' 'cc list' 'bcc list' 
 ```
